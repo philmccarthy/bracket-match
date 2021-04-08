@@ -35,3 +35,16 @@
   
 #   // => true
 #   ```
+
+def bracket_match(brackets)
+  frequency_hash =  Hash.new { |hash, key| hash[key] = 0 }
+  brackets.chars.each do |bracket|
+    frequency_hash[bracket] += 1
+  end
+end
+
+puts bracket_match('{(')
+puts bracket_match('{()}')
+puts bracket_match('{[)][]}')
+puts bracket_match(']')
+puts bracket_match('({[]}{[]})')

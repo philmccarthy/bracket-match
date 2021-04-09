@@ -45,7 +45,7 @@ class BracketMatch
   def self.paired?(string)
     stack = []
     string.chars.each do |char|
-      stack << char if BRACKETS.key?(char)
+      stack.push(char) if BRACKETS.key?(char)
       return false if BRACKETS.key(char) && BRACKETS.key(char) != stack.pop
     end
     stack.empty?

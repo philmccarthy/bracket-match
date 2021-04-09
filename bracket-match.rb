@@ -35,16 +35,26 @@
   
 #   // => true
 #   ```
+class BracketMatch
+  BRACKETS = {
+    '(' => ')',
+    '[' => ']',
+    '{' => '}'
+  }
 
-def bracket_match(brackets)
-  frequency_hash =  Hash.new { |hash, key| hash[key] = 0 }
-  brackets.chars.each do |bracket|
-    frequency_hash[bracket] += 1
+  def self.paired?(string)
+    stack = []
+    string.chars.each do |char|
+      stack << char if BRACKETS.key?(char)
+      return false if BRACKETS.key(char) && BRACKETS.key(char) != stack.pop
+    end
+    stack.empty?
   end
 end
 
-puts bracket_match('{(')
-puts bracket_match('{()}')
-puts bracket_match('{[)][]}')
-puts bracket_match(']')
-puts bracket_match('({[]}{[]})')
+puts BracketMatch.paired?('{}')
+puts BracketMatch.paired?('{(')
+puts BracketMatch.paired?('{()}')
+puts BracketMatch.paired?('{[)][]}')
+puts BracketMatch.paired?(']')
+puts BracketMatch.paired?('({[]}{[]})')
